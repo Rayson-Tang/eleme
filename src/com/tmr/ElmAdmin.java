@@ -51,10 +51,14 @@ public class ElmAdmin {
                         System.out.println("欢迎下次光临");
                         break;
                     }
+                    default: {
+                        System.out.println("非法输入");
+                        break;
+                    }
                 }
             }
         }
-        else{
+        else {
             System.out.println("用户名或密码错误");
         }
     }

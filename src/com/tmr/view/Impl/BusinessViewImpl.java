@@ -79,12 +79,15 @@ public class BusinessViewImpl implements BusinessView {
     public void delete() {
         System.out.println("请输入要删除的商家编号");
         int businessId = input.nextInt();
-        int r = businessDao.remove(businessId);
-        if (r != 0) {
-            System.out.println("删除成功");
-        }
-        else {
-            System.out.println("无此商家");
+        System.out.println("是否要删除该商家 y/n");
+        if (input.next().equals("y")) {
+            int r = businessDao.remove(businessId);
+            if (r > 0) {
+                System.out.println("删除成功");
+            }
+            else {
+                System.out.println("无此商家");
+            }
         }
     }
 
@@ -183,6 +186,10 @@ public class BusinessViewImpl implements BusinessView {
                 }
                 case 6: {
                     System.out.println("已退出更改信息模式");
+                    break;
+                }
+                default: {
+                    System.out.println("非法输入");
                     break;
                 }
             }

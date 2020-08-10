@@ -92,6 +92,10 @@ public class ElmBusiness {
                     System.out.println("返回一级菜单");
                     break;
                 }
+                default: {
+                    System.out.println("非法输入");
+                    break;
+                }
             }
         }
     }

@@ -87,9 +87,12 @@ public class FoodViewImpl implements FoodView {
                     }
                     break;
                 }
-
-                case 6: {
+                case 4: {
                     System.out.println("已退出更改信息模式");
+                    break;
+                }
+                default: {
+                    System.out.println("非法输入");
                     break;
                 }
             }
@@ -104,10 +107,10 @@ public class FoodViewImpl implements FoodView {
         System.out.println("是否要删除该食品 y/n");
         if (input.next().equals("y")) {
             int result = foodDao.removeFood(foodId);
-            if (result > 0){
+            if (result > 0) {
                 System.out.println("删除成功");
-            }else
-            {
+            }
+            else {
                 System.out.println("删除失败");
             }
         }
