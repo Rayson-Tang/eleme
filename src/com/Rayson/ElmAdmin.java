@@ -1,10 +1,10 @@
-package com.tmr;
+package com.Rayson;
 
-import com.tmr.domain.Admin;
-import com.tmr.view.AdminView;
-import com.tmr.view.BusinessView;
-import com.tmr.view.Impl.AdminViewImpl;
-import com.tmr.view.Impl.BusinessViewImpl;
+import com.Rayson.domain.Admin;
+import com.Rayson.view.AdminView;
+import com.Rayson.view.BusinessView;
+import com.Rayson.view.Impl.AdminViewImpl;
+import com.Rayson.view.Impl.BusinessViewImpl;
 
 import java.util.Scanner;
 

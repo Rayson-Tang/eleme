@@ -1,6 +1,6 @@
-package com.tmr.view;
+package com.Rayson.view;
 
-import com.tmr.domain.Admin;
+import com.Rayson.domain.Admin;
 
 public interface AdminView {
     public Admin login();

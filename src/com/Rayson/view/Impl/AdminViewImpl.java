@@ -1,9 +1,9 @@
-package com.tmr.view.Impl;
+package com.Rayson.view.Impl;
 
-import com.tmr.dao.AdminDao;
-import com.tmr.dao.Impl.AdminDaoImpl;
-import com.tmr.domain.Admin;
-import com.tmr.view.AdminView;
+import com.Rayson.dao.AdminDao;
+import com.Rayson.dao.Impl.AdminDaoImpl;
+import com.Rayson.domain.Admin;
+import com.Rayson.view.AdminView;
 
 import java.util.Scanner;
 

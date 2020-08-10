@@ -1,6 +1,6 @@
-package com.tmr.dao;
+package com.Rayson.dao;
 
-import com.tmr.domain.Admin;
+import com.Rayson.domain.Admin;
 
 public interface AdminDao {
     public Admin getAdminByNameByPassword(String adminName, String password);

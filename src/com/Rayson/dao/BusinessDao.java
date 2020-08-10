@@ -1,7 +1,6 @@
-package com.tmr.dao;
+package com.Rayson.dao;
 
-import com.tmr.domain.Admin;
-import com.tmr.domain.Business;
+import com.Rayson.domain.Business;
 
 import java.util.List;
 

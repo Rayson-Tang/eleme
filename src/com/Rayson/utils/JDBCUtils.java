@@ -1,4 +1,4 @@
-package com.tmr.utils;
+package com.Rayson.utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 

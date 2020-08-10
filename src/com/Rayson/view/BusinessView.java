@@ -1,6 +1,6 @@
-package com.tmr.view;
+package com.Rayson.view;
 
-import com.tmr.domain.Business;
+import com.Rayson.domain.Business;
 
 public interface BusinessView {
     public void searchAll();

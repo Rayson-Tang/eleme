@@ -1,6 +1,6 @@
-package com.tmr.dao;
+package com.Rayson.dao;
 
-import com.tmr.domain.Food;
+import com.Rayson.domain.Food;
 
 import java.util.List;
 

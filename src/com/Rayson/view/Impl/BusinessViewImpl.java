@@ -1,11 +1,10 @@
-package com.tmr.view.Impl;
+package com.Rayson.view.Impl;
 
-import com.tmr.dao.BusinessDao;
-import com.tmr.dao.Impl.BusinessDaoImpl;
-import com.tmr.domain.Business;
-import com.tmr.view.BusinessView;
+import com.Rayson.dao.BusinessDao;
+import com.Rayson.dao.Impl.BusinessDaoImpl;
+import com.Rayson.domain.Business;
+import com.Rayson.view.BusinessView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

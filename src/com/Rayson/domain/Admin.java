@@ -1,4 +1,4 @@
-package com.tmr.domain;
+package com.Rayson.domain;
 
 //     用户实体类
 

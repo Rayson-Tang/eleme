@@ -1,9 +1,8 @@
-package com.tmr.dao.Impl;
+package com.Rayson.dao.Impl;
 
-import com.tmr.dao.BusinessDao;
-import com.tmr.domain.Admin;
-import com.tmr.domain.Business;
-import com.tmr.utils.JDBCUtils;
+import com.Rayson.dao.BusinessDao;
+import com.Rayson.domain.Business;
+import com.Rayson.utils.JDBCUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

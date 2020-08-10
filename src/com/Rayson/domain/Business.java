@@ -1,4 +1,4 @@
-package com.tmr.domain;
+package com.Rayson.domain;
 
 public class Business {
     private Integer businessId;
