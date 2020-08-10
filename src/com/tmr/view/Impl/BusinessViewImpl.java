@@ -13,6 +13,7 @@ public class BusinessViewImpl implements BusinessView {
     BusinessDao businessDao = new BusinessDaoImpl();
     Scanner input = new Scanner(System.in);
 
+
     @Override
     public void searchAll() {
         List<Business> listAll = businessDao.search(null, null);
@@ -79,10 +80,135 @@ public class BusinessViewImpl implements BusinessView {
         System.out.println("请输入要删除的商家编号");
         int businessId = input.nextInt();
         int r = businessDao.remove(businessId);
-        if (r != 0){
+        if (r != 0) {
             System.out.println("删除成功");
-        }else {
+        }
+        else {
             System.out.println("无此商家");
+        }
+    }
+
+    @Override
+    public Business login() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("请输入商家编号");
+        Integer BusinessId = input.nextInt();
+        System.out.println("请输入密码");
+        String password = input.next();
+        BusinessDao businessDao = new BusinessDaoImpl();
+        Business business = new Business();
+        business = businessDao.getBusinessByNameByPassword(BusinessId, password);
+        return business;
+    }
+
+    @Override
+    public void BusinessMsg(Business business) {
+        List<Business> list = businessDao.lookMsg(business.getBusinessId(), business.getPassword());
+        for (Business b : list) {
+            System.out.println("商家编号：" + b.getBusinessId());
+            System.out.println("商家名称：" + b.getBusinessName());
+            System.out.println("商家地址：" + b.getBusinessAddress());
+            System.out.println("食品分类：" + b.getBusinessExplain());
+            System.out.println("起送价格：" + b.getStarPrice());
+            System.out.println("配送价格：" + b.getDeliverPrice());
+        }
+    }
+
+    @Override
+    public void reviseMsg(Integer businessId) {
+        Integer menu = 0;
+        while (menu != 6) {
+            System.out.println("请选择要更改的信息 1.名称 2.地址 3.食品分类 4.起送价格 5.配送价格，输入6退出更改");
+            menu = input.nextInt();
+            switch (menu) {
+                case 1: {
+                    System.out.println("请输入新的名称");
+                    String newName = input.next();
+                    int result = businessDao.updateMsg(businessId, "businessName", newName);
+                    if (result != 0) {
+                        System.out.println("更改成功");
+                    }
+                    else {
+                        System.out.println("更改失败");
+                    }
+                    break;
+                }
+                case 2: {
+                    System.out.println("请输入新的地址");
+                    String newAddress = input.next();
+                    int result = businessDao.updateMsg(businessId, "businessAddress", newAddress);
+                    if (result != 0) {
+                        System.out.println("更改成功");
+                    }
+                    else {
+                        System.out.println("更改失败");
+                    }
+                    break;
+                }
+                case 3: {
+                    System.out.println("请输入新的食品分类");
+                    String newExplain = input.next();
+                    int result = businessDao.updateMsg(businessId, "businessExplain", newExplain);
+                    if (result != 0) {
+                        System.out.println("更改成功");
+                    }
+                    else {
+                        System.out.println("更改失败");
+                    }
+                    break;
+                }
+                case 4: {
+                    System.out.println("请输入新的起送价格");
+                    String newStarPrice = input.next();
+                    int result = businessDao.updateMsg(businessId, "starPrice", newStarPrice);
+                    if (result != 0) {
+                        System.out.println("更改成功");
+                    }
+                    else {
+                        System.out.println("更改失败");
+                    }
+                    break;
+                }
+                case 5: {
+                    System.out.println("请输入新的配送价格");
+                    String newDeliverPrice = input.next();
+                    int result = businessDao.updateMsg(businessId, "deliverPrice", newDeliverPrice);
+                    if (result != 0) {
+                        System.out.println("更改成功");
+                    }
+                    else {
+                        System.out.println("更改失败");
+                    }
+                    break;
+                }
+                case 6: {
+                    System.out.println("已退出更改信息模式");
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void revisePassword(Integer businessId) {
+        System.out.println("请输入原密码");
+        String oldPassword1 = input.next();
+        String oldPassword2 = businessDao.confirmPassword(businessId, oldPassword1);
+        if (oldPassword1 == oldPassword2 || oldPassword1.equals(oldPassword2)) {
+            System.out.println("请输入新密码");
+            String newPassword1 = input.next();
+            System.out.println("再次输入新密码");
+            String newPassword2 = input.next();
+            if (newPassword1 == newPassword2 || oldPassword1.equals(oldPassword2)) {
+                businessDao.updatePassword(businessId, newPassword1);
+                System.out.println("更改成功");
+            }
+            else {
+                System.out.println("两次密码不一致");
+            }
+        }
+        else {
+            System.out.println("原密码错误");
         }
     }
 }

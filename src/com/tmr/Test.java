@@ -15,23 +15,33 @@ public class Test {
 //        sql.append(" and businessName like '%").append(businessName).append("%'");
 //        sql.append(" and businessAddress like '%").append(businessAddress).append("%'");
 //        System.out.println(sql);
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql = "insert into business values(null,?,?,?,?,?,?)";
-        try {
-            int n = 0;
-            conn = JDBCUtils.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                n = rs.getInt("businessId");
-            }
 
-            System.out.println(n);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+//        Connection conn = null;
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//        String sql = "insert into business values(null,?,?,?,?,?,?)";
+//        try {
+//            int n = 0;
+//            conn = JDBCUtils.getConnection();
+//            pstmt = conn.prepareStatement(sql);
+//            rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                n = rs.getInt(1);
+//            }
+//
+//            System.out.println(n);
+//        }
+//        catch (SQLException e) {
+        //           e.printStackTrace();
+    //}
+//
+//        StringBuilder sql = new StringBuilder("update business set ");
+//        sql.append("column").append(" = '").append("newMsg").append("' where businessId = Id");
+//        System.out.println(sql);
+        String sql = "update business set password = " + "newPassword" + " where businessId = " + "Id";
+        System.out.println(sql);
     }
+
 }
+

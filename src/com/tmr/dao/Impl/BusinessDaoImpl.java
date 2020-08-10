@@ -84,20 +84,48 @@ public class BusinessDaoImpl implements BusinessDao {
 
     @Override
     public int remove(Integer businessId) {
-        String sql1 = "select * from business where businessId = ?";
-        String sql2 = "delete from business where businessId = ?";
-        int Id = 0;
+        String sql = "delete from business where businessId = ?";
+        int result = 0;
         try {
             conn = JDBCUtils.getConnection();
-            pstmt = conn.prepareStatement(sql1);
+            conn.setAutoCommit(false);
+            pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, businessId);
-            rs = pstmt.executeQuery();
-            while (rs.next()){
-            Id = rs.getInt("businessId");}
+            result = pstmt.executeUpdate();
+            conn.commit();
+        }
+        catch (SQLException e) {
+            result = 0;
+            try {
+                conn.rollback();
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        finally {
+            JDBCUtils.close(rs, pstmt, conn);
+        }
+        return result;
+    }
+
+    @Override
+    public Business getBusinessByNameByPassword(Integer BusinessId, String password) {
+        Business business = null;
+        String sql = "select * from business where businessId = ? and password = ?";
+        try {
             conn = JDBCUtils.getConnection();
-            pstmt = conn.prepareStatement(sql2);
-            pstmt.setInt(1, businessId);
-            pstmt.executeUpdate();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, BusinessId);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+            }
+
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -105,6 +133,98 @@ public class BusinessDaoImpl implements BusinessDao {
         finally {
             JDBCUtils.close(rs, pstmt, conn);
         }
-        return Id;
+        return business;
     }
+
+    @Override
+    public List<Business> lookMsg(Integer businessId, String password) {
+        ArrayList<Business> list = new ArrayList<>();
+        String sql = "select * from business where businessId = ? and password = ?";
+
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, businessId);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Business business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+                business.setBusinessName(rs.getString("businessName"));
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setStarPrice(rs.getDouble("starPrice"));
+                business.setDeliverPrice(rs.getDouble("deliveryPrice"));
+                list.add(business);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            JDBCUtils.close(rs, pstmt, conn);
+        }
+        return list;
+    }
+
+    @Override
+    public Integer updateMsg(Integer Id, String column, String newMsg) {
+        int result = 0;
+        StringBuilder sql = new StringBuilder("update business set ");
+        sql.append(column).append(" = '").append(newMsg).append("' where businessId = ").append(Id);
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql.toString());
+            result = pstmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            JDBCUtils.close(pstmt, conn);
+        }
+        return result;
+    }
+
+    @Override
+    public Integer updatePassword(Integer Id, String newPassword) {
+        int result = 0;
+        String sql = "update business set password = " + newPassword + " where businessId = " + Id;
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            JDBCUtils.close(pstmt, conn);
+        }
+        return result;
+    }
+
+    @Override
+    public String confirmPassword(Integer Id, String oldPassword) {
+        String sql = "select password from business where businessId = " + Id;
+        String old = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                old = rs.getString("password");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            JDBCUtils.close(rs, pstmt, conn);
+        }
+        return old;
+    }
+
 }
+
